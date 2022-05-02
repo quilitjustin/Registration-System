@@ -16,6 +16,30 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                 </div>
+                {{-- 
+                    role_id = 1 is admin
+                    This is nav for admin.    
+                --}}
+                @if(auth()->user()->role_id == 1)
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('admin.users.index') }}" :active="request()->routeIs('users')">
+                        {{ __('Users') }}
+                    </x-jet-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('admin.students.index') }}" :active="request()->routeIs('students')">
+                        {{ __('Students') }}
+                    </x-jet-nav-link>
+                </div>
+                @endif
+                {{-- For Staff --}}
+                @if(auth()->user()->role_id != 1)
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('staff.students.index') }}" :active="request()->routeIs('students')">
+                        {{ __('Students') }}
+                    </x-jet-nav-link>
+                </div>
+                @endif
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
