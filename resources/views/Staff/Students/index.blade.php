@@ -46,6 +46,9 @@
                                     </th>
                                     <th scope="col" width="250" class="px-6 py-3 bg-gray-50">
                                         <form action="{{ route('staff.students.index') }}" method="GET">
+                                            @if(isset($_GET['sort']))
+                                                <input type="hidden" name="rule" id="rule" value="s-reset">
+                                            @endif
                                             <input type="text" name="search" id="search" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="search">
                                         </form>
                                     </th>

@@ -19,11 +19,19 @@ class ManageStudentRecord extends Controller
 
     private $sortBy = 'created_at';
     private $sortOrder = 'desc';
-    
+
     public function index()
     {
         $records = Records::select('*');
         if(isset($_GET['search']) && !empty($_GET['search'])){
+            if(isset($_GET['rule'])){
+                if($_GET['rule'] == 'ns-reset'){
+                    $this->sortBy = 'created_at';
+                    $this->sortOrder = 'desc';
+                }
+                unset($_GET['rule']);
+                unset($_GET['sort']);
+            }
             $keyword = strip_tags($_GET['search']);
             $records->where(
                 'student_id', 'LIKE', "%{$keyword}%"

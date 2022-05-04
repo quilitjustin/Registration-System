@@ -9,6 +9,71 @@
         <div class="max-w-6xl mx-auto py-10 sm:px-6 lg:px-8">
             <div class="block mb-8">
                 <a href="{{ route('admin.users.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Add User</a>
+                <form class="inline-block" method="GET" action="{{ route('admin.users.index') }}" style="width:8rem">
+                    @if(isset($_GET['search']) && !empty($_GET['search']))
+                        <input type="hidden" name="search" value="{{ $_GET['search'] }}">
+                    @endif
+                    <label for="sort">Sort By:</label>
+                    <select onchange="this.form.submit()" id="sort" name="sort" class="form-input rounded-md py-2 shadow-sm mt-1 block w-full">
+                        <option class="bg-muted text-muted" value="null" selected disabled>Select</option>
+                        <option value="id-desc" 
+                            @isset ($_GET['sort'])
+                                @if($_GET['sort'] == "id-desc")
+                                    selected
+                                @endif
+                            @endisset
+                        >ID (DESC)</option>
+                        <option value="id-asc"
+                            @isset ($_GET['sort'])
+                                @if($_GET['sort'] == "id-asc")
+                                    selected
+                                @endif
+                            @endisset
+                        >ID (ASC)</option>
+                        <option value="n-desc"
+                            @isset ($_GET['sort'])
+                                @if($_GET['sort'] == "n-desc")
+                                    selected
+                                @endif
+                            @endisset
+                        >Name (DESC)</option>
+                        <option value="n-asc"
+                            @isset ($_GET['sort'])
+                                @if($_GET['sort'] == "n-asc")
+                                    selected
+                                @endif
+                            @endisset
+                        >Name (ASC)</option>
+                        <option value="e-desc"
+                            @isset ($_GET['sort'])
+                                @if($_GET['sort'] == "e-desc")
+                                    selected
+                                @endif
+                            @endisset
+                        >Email (DESC)</option>
+                        <option value="e-asc"
+                            @isset ($_GET['sort'])
+                                @if($_GET['sort'] == "e-asc")
+                                    selected
+                                @endif
+                            @endisset
+                        >Email (ASC)</option>
+                        <option value="d-desc"
+                            @isset ($_GET['sort'])
+                                @if($_GET['sort'] == "d-desc")
+                                    selected
+                                @endif
+                            @endisset
+                        >Date (DESC)</option>
+                        <option value="d-asc"
+                            @isset ($_GET['sort'])
+                                @if($_GET['sort'] == "d-asc")
+                                    selected
+                                @endif
+                            @endisset
+                        >Date (ASC)</option>
+                    </select>
+                </form>
             </div>
             <div class="flex flex-col">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -30,7 +95,10 @@
                                         Date Created
                                     </th>
                                     <th scope="col" width="200" class="px-6 py-3 bg-gray-50">
-                                        <form action="{{ route('admin.students.index') }}" method="GET">
+                                        <form action="{{ route('admin.users.index') }}" method="GET">
+                                            @if(isset($_GET['sort']))
+                                                <input type="hidden" name="rule" id="rule" value="s-reset">
+                                            @endif
                                             <input type="text" name="search" id="search" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="search">
                                         </form>
                                     </th>

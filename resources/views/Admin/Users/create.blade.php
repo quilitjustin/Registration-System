@@ -11,7 +11,7 @@
             <div class="mt-5 md:mt-0 md:col-span-2 p-3">
                 <form class="mx-auto" method="post" action="{{ route('admin.users.store') }}" style="width:20rem">
                     @csrf
-                    <div class="shadow overflow-hidden sm:rounded-md">
+                    <div class="shadow overflow-hidden sm:rounded-md p-2">
                         <div class="px-4 py-5 bg-white sm:p-6">
                             @error('name')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
