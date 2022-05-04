@@ -43,7 +43,7 @@ Route::group(['middleware' => 'auth'], function(){
         'middleware' => 'role:staff',
         'as' => 'staff.',
     ], function(){
-        //For managing Users
-        Route::resource('students', App\Http\Controllers\Staff\StudentRecordController::class);
+        //For managing Student Records
+        Route::resource('students', App\Http\Controllers\Staff\ManageStudentRecord::class);
     });
 });

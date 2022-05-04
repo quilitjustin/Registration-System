@@ -1,4 +1,11 @@
 <x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <a href="{{ route('admin.students.index') }}">
+                &Larr;Go Back
+            </a>
+        </h2>
+    </x-slot>
     <div>
         <div class="max-w-4xl mx-auto py-10 sm:px-6 lg:px-8">
             <div class="mt-5 md:mt-0 md:col-span-2 p-3">
@@ -57,8 +64,11 @@
                         
                         <div>
                             <label for="gender" class="block font-medium text-sm text-gray-700">Gender</label>
-                            <input type="text" name="gender" id="gender" class="form-input rounded-md shadow-sm mt-1 block w-full"
-                                   value="{{ $record[0]['gender'] }}" />
+                            <select value="{{ old('gender', '') }}" id="gender" name="gender" class="form-input rounded-md py-2 shadow-sm mt-1 block w-full">
+                                <option value="null" selected disabled></option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
                             @error('gender')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror

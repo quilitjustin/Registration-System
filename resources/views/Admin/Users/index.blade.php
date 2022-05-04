@@ -30,7 +30,9 @@
                                         Date Created
                                     </th>
                                     <th scope="col" width="200" class="px-6 py-3 bg-gray-50">
-
+                                        <form action="{{ route('admin.students.index') }}" method="GET">
+                                            <input type="text" name="search" id="search" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="search">
+                                        </form>
                                     </th>
                                 </tr>
                                 </thead>
@@ -51,7 +53,7 @@
                                                 {{ $record->created_at }}
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <td class="flex items-center justify-end px-6 py-4 whitespace-nowrap text-sm font-medium">
                                                 <a href="{{ route('admin.users.edit', $record->id) }}" class="text-indigo-600 hover:text-indigo-900 mb-2 mr-2">Edit</a>
                                                 <form class="inline-block" action="{{ route('admin.users.destroy', $record->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
                                                     <input type="hidden" name="_method" value="DELETE">

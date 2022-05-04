@@ -15,8 +15,8 @@ class UserUpdateFormRequest extends FormRequest
      */
     public function authorize()
     {   
-        //Authorize if admin
-        if(auth()->user()->role_id == 1){
+        //Authorize if admin or staff
+        if(auth()->user()->role_id == 1 || auth()->user()->role_id == 2){
             return true;
         }
         return false;

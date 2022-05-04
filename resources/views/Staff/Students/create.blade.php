@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            <a href="{{ route('admin.students.index') }}">
+            <a href="{{ route('staff.students.index') }}">
                 &Larr;Go Back
             </a>
         </h2>
@@ -12,7 +12,7 @@
                 <div class="flex items-center font-semibold x-4 py-3 bg-gray-50 sm:px-6 shadow overflow-hidden sm:rounded-md">
                     <p>Create New Record</p>
                 </div>
-                <form class="bg-white mx-auto p-5" method="post" action="{{ route('admin.students.store') }}">
+                <form class="bg-white mx-auto p-5" method="post" action="{{ route('staff.students.store') }}">
                     @csrf
                     <div class="grid grid-cols-4 gap-4">
                         <p class="col-span-4 font-semibold">Details</p>

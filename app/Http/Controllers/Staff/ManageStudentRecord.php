@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Staff;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,7 +19,7 @@ class ManageStudentRecord extends Controller
 
     private $sortBy = 'created_at';
     private $sortOrder = 'desc';
-    
+
     public function index()
     {
         $records = Records::select('*');
@@ -86,7 +86,7 @@ class ManageStudentRecord extends Controller
                     ->orderBy($this->sortBy, $this->sortOrder)
                     ->paginate(7);
 
-        return view('Admin.Students.index',[
+        return view('Staff.Students.index',[
             'records' => $records
         ]);
     }
@@ -98,7 +98,7 @@ class ManageStudentRecord extends Controller
      */
     public function create()
     {
-        return view('Admin.Students.create');
+        return view('Staff.Students.create');
     }
 
     /**
@@ -138,7 +138,7 @@ class ManageStudentRecord extends Controller
 
         $address->save();
 
-        return redirect()->route('admin.students.index');
+        return redirect()->route('staff.students.index');
     }
 
     /**
@@ -158,7 +158,7 @@ class ManageStudentRecord extends Controller
         ->where('address.student_id', $student->id)    
         ->get();
 
-        return view('Admin.Students.show', [
+        return view('Staff.Students.show', [
             'record' => json_decode($data, true)
         ]);
     }
@@ -180,7 +180,7 @@ class ManageStudentRecord extends Controller
         ->where('address.student_id', $student->id)    
         ->get();
 
-        return view('Admin.Students.edit', [
+        return view('Staff.Students.edit', [
             'record' => json_decode($data, true)
         ]);
     }
@@ -221,7 +221,7 @@ class ManageStudentRecord extends Controller
 
         $address->save();
 
-        return redirect()->route('admin.students.show', [
+        return redirect()->route('staff.students.show', [
             'student' => $student->id
         ]);
     }
@@ -231,12 +231,10 @@ class ManageStudentRecord extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * Staff can't delete records
      */
     public function destroy(Records $student)
     {
-        $address = Address::where('student_id', $student->id);
-        $student->delete();
-        $address->delete();
-        return redirect()->route('admin.students.index');
+        
     }
 }
