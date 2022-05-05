@@ -33,7 +33,7 @@ class UserUpdateFormRequest extends FormRequest
         $id = strip_tags($this->request->get('id'));
         if($action == 'details'){
             return [
-                'name' => ['required', 'alpha'],
+                'name' => ['required', 'regex:/^[a-zA-Z ]*$/'],
                 'email' => ['required', 'email', \Illuminate\Validation\Rule::unique('users')->ignore($id)],
                 'action' => ['required', 'in:details,password'],
             ];

@@ -29,7 +29,7 @@ class UserFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'alpha'],
+            'name' => ['required', 'regex:/^[a-zA-Z ]*$/'],
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'min:8']
         ];
