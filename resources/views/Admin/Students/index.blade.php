@@ -3,19 +3,28 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Students') }}
         </h2>
+        @if(session()->has('msg'))
+            <div class="flex items-center justify-center">
+                <p class="text-semibold text-xl 
+                    text-green-400
+                    @if (session()->get('msg') == 'Deleted Successfully')
+                        {{ 'text-red-400' }}
+                    @endif
+                ">{{ session()->get('msg') }}</p>
+            </div>
+        @endif
     </x-slot>
 
     <div>
         <div class="max-w-6xl mx-auto py-10 sm:px-6 lg:px-8">
             <div class="block mb-8">
                 <a href="{{ route('admin.students.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Add Record</a>
-                <form class="inline-block" method="GET" action="{{ route('admin.students.index') }}" style="width:8rem">
+                <form class="inline-block" method="GET" action="{{ route('admin.students.index') }}" style="width:10rem">
                     @if(isset($_GET['search']) && !empty($_GET['search']))
                         <input type="hidden" name="search" value="{{ $_GET['search'] }}">
                     @endif
-                    <label for="sort">Sort By:</label>
                     <select onchange="this.form.submit()" id="sort" name="sort" class="form-input rounded-md py-2 shadow-sm mt-1 block w-full">
-                        <option value="null" selected disabled></option>
+                        <option value="null" selected disabled>Sort By</option>
                         <option value="id-desc"
                             @isset ($_GET['sort'])
                                 @if($_GET['sort'] == "id-desc")
@@ -108,12 +117,15 @@
                                                 </td>
 
                                                 <td class="flex items-center justify-end px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                    <a href="{{ route('admin.students.show', $record->id) }} " class="text-blue-600 hover:text-indigo-900 mb-2 mr-2">View</a>
-                                                    <a href="{{ route('admin.students.edit', $record->id) }} " class="text-indigo-600 hover:text-indigo-900 mb-2 mr-2">Edit</a>
+                                                    <a href="{{ route('admin.students.show', $record->id) }} " class="text-blue-600 hover:text-indigo-900 mb-2 mr-2"><i class="bi bi-eye"></i>View</a>
+                                                    <a href="{{ route('admin.students.edit', $record->id) }} " class="text-indigo-600 hover:text-indigo-900 mb-2 mr-2"><i class="bi bi-pencil-square"></i>Edit</a>
                                                     <form class="inline-block" action="{{ route('admin.students.destroy', $record->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                        <input type="submit" class="text-red-600 hover:text-red-900 mb-2 mr-2" value="Delete">
+                                                        <div class="text-red-600 hover:text-red-900">
+                                                            <i class="bi bi-trash-fill" style="margin-right:-5px"></i>
+                                                            <input type="submit" class="mb-2 mr-2" value="Delete" style="cursor: pointer">
+                                                        </div>   
                                                     </form>
                                                 </td>
                                             </tr>

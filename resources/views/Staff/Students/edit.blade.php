@@ -99,9 +99,9 @@
                         </div>
 
                         <div>
-                            <label for="contact-no" class="block font-medium text-sm text-gray-700">Guardian</label>
+                            <label for="guardian" class="block font-medium text-sm text-gray-700">Guardian</label>
                             <input type="text" name="guardian" id="guardian" class="form-input rounded-md shadow-sm mt-1 block w-full"
-                                   value="{{ $record[0]['contact_no'] }}" />
+                                   value="{{ $record[0]['guardian'] }}" />
                             @error('guardian')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror

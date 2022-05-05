@@ -148,7 +148,7 @@ class ManageStudentRecord extends Controller
 
         return redirect()->route('admin.students.show', [
             'student' => $record->id
-        ]);
+        ])->with('msg', 'Created Successfully');
     }
 
     /**
@@ -233,7 +233,7 @@ class ManageStudentRecord extends Controller
 
         return redirect()->route('admin.students.show', [
             'student' => $student->id
-        ]);
+        ])->with('msg', 'Updated Successfully');
     }
 
     /**
@@ -247,6 +247,6 @@ class ManageStudentRecord extends Controller
         $address = Address::where('student_id', $student->id);
         $student->delete();
         $address->delete();
-        return redirect()->route('admin.students.index');
+        return redirect()->route('admin.students.index')->with('msg', 'Deleted Successfully');
     }
 }

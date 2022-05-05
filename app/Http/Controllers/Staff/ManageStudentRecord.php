@@ -146,9 +146,9 @@ class ManageStudentRecord extends Controller
 
         $address->save();
 
-        return redirect()->route('admin.students.show', [
+        return redirect()->route('staff.students.show', [
             'student' => $record->id
-        ]);
+        ])->with('msg', 'Created Successfully');
     }
 
     /**
@@ -233,7 +233,7 @@ class ManageStudentRecord extends Controller
 
         return redirect()->route('staff.students.show', [
             'student' => $student->id
-        ]);
+        ])->with('msg', 'Updated Successfully');
     }
 
     /**

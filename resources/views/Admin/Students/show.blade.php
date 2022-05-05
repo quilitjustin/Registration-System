@@ -4,6 +4,16 @@
             <a href="{{ route('admin.students.index') }}">
                 &Larr;Go Back
             </a>
+            @if(session()->has('msg'))
+                <div class="flex items-center justify-center">
+                    <p class="text-semibold text-xl 
+                        text-green-400
+                        @if (session()->get('msg') == 'Deleted Successfully')
+                            {{ 'text-red-400' }}
+                        @endif
+                    ">{{ session()->get('msg') }}</p>
+                </div>
+            @endif
         </h2>
     </x-slot>
     <div>

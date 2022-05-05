@@ -23,7 +23,7 @@
                 @if(auth()->user()->role_id == 1)
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('admin.users.index') }}" :active="request()->routeIs('users')">
-                        {{ __('Users') }}
+                        {{ __('Staff') }}
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">

@@ -38,6 +38,9 @@ class ManageUsersController extends Controller
             $users->orWhere(
                 'name', 'LIKE', "%{$keyword}%"
             );
+            $users->orWhere(
+                'email', 'LIKE', "%{$keyword}%"
+            );
         }
 
         if(isset($_GET['sort']) && !empty($_GET['sort'])){
@@ -130,7 +133,7 @@ class ManageUsersController extends Controller
         $user->password = Hash::make($data['password']);
         $user->save();
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.users.index')->with('msg', 'Created Successfully');
     }
 
     /**
@@ -178,7 +181,7 @@ class ManageUsersController extends Controller
         
         $user->save();
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.users.index')->with('msg', 'Updated Successfully');
     }
 
     /**
@@ -190,6 +193,6 @@ class ManageUsersController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.users.index')->with('msg', 'Deleted Successfully');
     }
 }
