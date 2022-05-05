@@ -19,13 +19,13 @@ return new class extends Migration
             $table->string('f_name');
             $table->string('l_name');
             $table->string('m_name');
-            $table->bigInteger('contact_no');
+            $table->string('contact_no');
             $table->string('gender');
             $table->date('birthdate');
             $table->string('birthplace');
             $table->string('guardian');
             $table->string('relationship_to_guardian');
-            $table->bigInteger('guardian_contact');
+            $table->string('guardian_contact');
             $table->timestamps();
         });
 

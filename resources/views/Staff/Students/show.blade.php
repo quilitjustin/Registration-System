@@ -49,7 +49,7 @@
                     </div>
 
                     <div>
-                        <p class="block font-medium text-sm text-gray-700">Guardian: <span class="font-semibold">{{ $record[0]['contact_no'] }}</span></p>
+                        <p class="block font-medium text-sm text-gray-700">Guardian: <span class="font-semibold">{{ $record[0]['guardian'] }}</span></p>
                     </div>
 
                     <div>
