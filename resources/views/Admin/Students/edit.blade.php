@@ -15,6 +15,7 @@
                 <form class="bg-white mx-auto p-5" method="post" action="{{ route('admin.students.update', $record[0]['st_id']) }}">
                     @csrf
                     @method('PUT')
+                    <input type="hidden" name="id" value="{{ $record[0]['st_id'] }}">
                     <div class="grid grid-cols-4 gap-4">
                         <p class="col-span-4 font-semibold">Details</p>
                         <div>
@@ -64,10 +65,15 @@
                         
                         <div>
                             <label for="gender" class="block font-medium text-sm text-gray-700">Gender</label>
-                            <select value="{{ old('gender', '') }}" id="gender" name="gender" class="form-input rounded-md py-2 shadow-sm mt-1 block w-full">
+                            <select id="gender" name="gender" class="form-input rounded-md py-2 shadow-sm mt-1 block w-full">
                                 <option value="null" selected disabled></option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
+                                @if($record[0]['gender'] == 'Male')
+                                    <option value="Male" selected>Male</option>
+                                    <option value="Female">Female</option>
+                                @else
+                                    <option value="Male">Male</option>
+                                    <option value="Female" selected>Female</option>
+                                @endif
                             </select>
                             @error('gender')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
@@ -93,9 +99,9 @@
                         </div>
 
                         <div>
-                            <label for="contact-no" class="block font-medium text-sm text-gray-700">Guardian</label>
+                            <label for="guardian" class="block font-medium text-sm text-gray-700">Guardian</label>
                             <input type="text" name="guardian" id="guardian" class="form-input rounded-md shadow-sm mt-1 block w-full"
-                                   value="{{ $record[0]['contact_no'] }}" />
+                                   value="{{ $record[0]['guardian'] }}" />
                             @error('guardian')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror

@@ -16,12 +16,48 @@
                     <label for="sort">Sort By:</label>
                     <select onchange="this.form.submit()" id="sort" name="sort" class="form-input rounded-md py-2 shadow-sm mt-1 block w-full">
                         <option value="null" selected disabled></option>
-                        <option value="id-desc">Student ID (DESC)</option>
-                        <option value="id-asc">Student ID (ASC)</option>
-                        <option value="n-desc">Name (DESC)</option>
-                        <option value="n-asc">Name (ASC)</option>
-                        <option value="d-desc">Date (DESC)</option>
-                        <option value="d-asc">Date (ASC)</option>
+                        <option value="id-desc"
+                            @isset ($_GET['sort'])
+                                @if($_GET['sort'] == "id-desc")
+                                    selected
+                                @endif
+                            @endisset
+                        >Student ID (DESC)</option>
+                        <option value="id-asc"
+                            @isset ($_GET['sort'])
+                                @if($_GET['sort'] == "id-asc")
+                                    selected
+                                @endif
+                            @endisset
+                        >Student ID (ASC)</option>
+                        <option value="n-desc"
+                            @isset ($_GET['sort'])
+                                @if($_GET['sort'] == "n-desc")
+                                    selected
+                                @endif
+                            @endisset
+                        >Name (DESC)</option>
+                        <option value="n-asc"
+                            @isset ($_GET['sort'])
+                                @if($_GET['sort'] == "n-asc")
+                                    selected
+                                @endif
+                            @endisset
+                        >Name (ASC)</option>
+                        <option value="d-desc"
+                            @isset ($_GET['sort'])
+                                @if($_GET['sort'] == "d-desc")
+                                    selected
+                                @endif
+                            @endisset
+                        >Date (DESC)</option>
+                        <option value="d-asc"
+                            @isset ($_GET['sort'])
+                                @if($_GET['sort'] == "d-asc")
+                                    selected
+                                @endif
+                            @endisset
+                        >Date (ASC)</option>
                     </select>
                 </form>
             </div>

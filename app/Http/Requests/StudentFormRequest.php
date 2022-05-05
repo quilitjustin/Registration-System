@@ -27,24 +27,25 @@ class StudentFormRequest extends FormRequest
      */
     public function rules()
     {
+        $id = strip_tags($this->request->get('id'));
         return [
             'f-name' => ['required'],
             'l-name' => ['required'],
             'm-name' => ['required'],
-            'student-id' => ['required', 'integer'],
-            'contact-no' => ['required', 'digits:11'],
+            'student-id' => ['required', 'digits_between:1,9', \Illuminate\Validation\Rule::unique('student_record', 'student_id')->ignore($id)],
+            'contact-no' => ['required', 'regex:/^[09]{2}[0-9]{9}+$/'],
             'gender' => ['required', 'in:Male,Female'],
             'birthdate' => ['required', 'date'],
             'birthplace' => ['required'],
             'block' => ['required'],
-            'house-no' => ['required', 'integer'],
+            'house-no' => ['required', 'digits_between:1,9'],
             'street' => ['required'],
             'barangay' => ['required'],
             'municipality' => ['required'],
             'province' => ['required'],
             'guardian' => ['required'],
             'relation' => ['required'],
-            'guardian-contact' => ['required', 'digits:11']
+            'guardian-contact' => ['required', 'regex:/^[09]{2}[0-9]{9}+$/']
         ];
     }
     protected function prepareForValidation(){

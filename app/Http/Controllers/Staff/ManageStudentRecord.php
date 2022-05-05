@@ -146,7 +146,9 @@ class ManageStudentRecord extends Controller
 
         $address->save();
 
-        return redirect()->route('staff.students.index');
+        return redirect()->route('admin.students.show', [
+            'student' => $record->id
+        ]);
     }
 
     /**

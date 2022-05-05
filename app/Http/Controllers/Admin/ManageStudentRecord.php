@@ -146,7 +146,9 @@ class ManageStudentRecord extends Controller
 
         $address->save();
 
-        return redirect()->route('admin.students.index');
+        return redirect()->route('admin.students.show', [
+            'student' => $record->id
+        ]);
     }
 
     /**
@@ -165,7 +167,7 @@ class ManageStudentRecord extends Controller
             'address.municipality', 'address.province','student.guardian', 'student.relationship_to_guardian', 'student.guardian_contact')
         ->where('address.student_id', $student->id)    
         ->get();
-
+        
         return view('Admin.Students.show', [
             'record' => json_decode($data, true)
         ]);

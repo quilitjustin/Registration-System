@@ -12,6 +12,7 @@
                 <form class="mx-auto" method="post" action="{{ route('admin.users.update', $user->id) }}" style="width:20rem">
                     @csrf
                     @method('PUT')
+                    <input type="hidden" name="id" value="{{ $user->id }}">
                     <div class="shadow overflow-hidden sm:rounded-md p-2">
                         <div class="px-4 py-5 bg-white sm:p-6">
                             @error('name')

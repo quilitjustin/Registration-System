@@ -30,10 +30,11 @@ class UserUpdateFormRequest extends FormRequest
     public function rules()
     {   
         $action = $this->request->get('action');
+        $id = strip_tags($this->request->get('id'));
         if($action == 'details'){
             return [
                 'name' => ['required', 'alpha'],
-                'email' => ['required', 'email'],
+                'email' => ['required', 'email', \Illuminate\Validation\Rule::unique('users')->ignore($id)],
                 'action' => ['required', 'in:details,password'],
             ];
         }
