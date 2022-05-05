@@ -40,3 +40,4 @@ After completing the requirements above.
 10. Enjoy~
 
 If you want to import dummy data provided from our google drive, please read the readme.txt
+Default login: email = "admin@mail.com" password: "password"
