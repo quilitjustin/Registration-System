@@ -9,14 +9,14 @@
     <div>
         <div class="max-w-4xl mx-auto py-10 sm:px-6 lg:px-8">
             <div class="mt-5 md:mt-0 md:col-span-2 p-3">
-                <div class="flex items-center font-semibold x-4 py-3 bg-gray-50 sm:px-6 shadow overflow-hidden sm:rounded-md">
+                <div class="flex items-center font-semibold px-3 md:px-4 py-3 bg-gray-50 sm:px-6 shadow overflow-hidden rounded-md">
                     <p>Create New Record</p>
                 </div>
-                <form class="bg-white mx-auto p-5" method="post" action="{{ route('staff.students.store') }}">
+                <form class="bg-white mx-auto p-5" method="POST" action="{{ route('staff.students.store') }}">
                     @csrf
-                    <div class="grid grid-cols-4 gap-4">
-                        <p class="col-span-4 font-semibold">Details</p>
-                        <div>
+                    <div class="md:grid grid-cols-4 gap-4">
+                        <p class="col-span-4 font-semibold text-xl text-indigo-800">Details</p>
+                        <div class="mt-2 md:mt-0">
                             <label for="f-name" class="block font-medium text-sm text-gray-700">First Name</label>
                             <input type="text" name="f-name" id="f-name" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('f-name', '') }}" />
@@ -25,7 +25,7 @@
                             @enderror
                         </div>
 
-                        <div>
+                        <div class="mt-2 md:mt-0">
                             <label for="l-name" class="block font-medium text-sm text-gray-700">Last Name</label>
                             <input type="text" name="l-name" id="l-name" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('l-name', '') }}" />
@@ -34,7 +34,7 @@
                             @enderror
                         </div>
 
-                        <div>
+                        <div class="mt-2 md:mt-0">
                             <label for="m-name" class="block font-medium text-sm text-gray-700">Middle Name</label>
                             <input type="text" name="m-name" id="m-name" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('m-name', '') }}" />
@@ -43,16 +43,16 @@
                             @enderror
                         </div>
 
-                        <div>
+                        <div class="mt-2 md:mt-0">
                             <label for="student-id" class="block font-medium text-sm text-gray-700">Student ID</label>
                             <input type="text" name="student-id" id="student-id" class="form-input rounded-md shadow-sm mt-1 block w-full"
-                                   value="{{ old('student-id', '') }}" />
+                                   value="{{ $student_id }}" />
                             @error('student-id')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <div>
+                        <div class="mt-2 md:mt-0">
                             <label for="contact-no" class="block font-medium text-sm text-gray-700">Contact#</label>
                             <input type="text" name="contact-no" id="contact-no" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('contact-no', '') }}" />
@@ -61,7 +61,7 @@
                             @enderror
                         </div>
                         
-                        <div>
+                        <div class="mt-2 md:mt-0">
                             <label for="gender" class="block font-medium text-sm text-gray-700">Gender</label>
                             <select value="{{ old('gender', '') }}" id="gender" name="gender" class="form-input rounded-md py-2 shadow-sm mt-1 block w-full">
                                 <option value="null" selected disabled></option>
@@ -73,7 +73,7 @@
                             @enderror
                         </div>
 
-                        <div>
+                        <div class="mt-2 md:mt-0">
                             <label for="birthdate" class="block font-medium text-sm text-gray-700">Birthdate</label>
                             <input type="date" name="birthdate" id="birthdate" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('birthdate', '') }}" />
@@ -82,7 +82,7 @@
                             @enderror
                         </div>
 
-                        <div>
+                        <div class="mt-2 md:mt-0">
                             <label for="birthplace" class="block font-medium text-sm text-gray-700">Birthplace</label>
                             <input type="text" name="birthplace" id="birthplace" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('birthplace', '') }}" />
@@ -91,8 +91,8 @@
                             @enderror
                         </div>
 
-                        <div>
-                            <label for="contact-no" class="block font-medium text-sm text-gray-700">Guardian</label>
+                        <div class="mt-2 md:mt-0">
+                            <label for="guardian" class="block font-medium text-sm text-gray-700">Guardian</label>
                             <input type="text" name="guardian" id="guardian" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('guardian', '') }}" />
                             @error('guardian')
@@ -100,7 +100,7 @@
                             @enderror
                         </div>
 
-                        <div>
+                        <div class="mt-2 md:mt-0">
                             <label for="relation" class="block font-medium text-sm text-gray-700">Relationship to guardian</label>
                             <input type="text" name="relation" id="relation" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('relation', '') }}" />
@@ -109,7 +109,7 @@
                             @enderror
                         </div>
 
-                        <div>
+                        <div class="mt-2 md:mt-0">
                             <label for="guardian-contact" class="block font-medium text-sm text-gray-700">Guardian Contact#</label>
                             <input type="text" name="guardian-contact" id="guardian-contact" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('guardian-contact', '') }}" />
@@ -118,8 +118,8 @@
                             @enderror
                         </div>
 
-                        <p class="col-span-4 font-semibold">Address</p>
-                        <div>
+                        <p class="col-span-4 font-semibold text-xl text-indigo-800">Address</p>
+                        <div class="mt-2 md:mt-0">
                             <label for="block" class="block font-medium text-sm text-gray-700">Block</label>
                             <input type="text" name="block" id="block" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('block', '') }}" />
@@ -128,7 +128,7 @@
                             @enderror
                         </div>
 
-                        <div>
+                        <div class="mt-2 md:mt-0">
                             <label for="house-no" class="block font-medium text-sm text-gray-700">House#</label>
                             <input type="text" name="house-no" id="house-no" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('house-no', '') }}" />
@@ -137,7 +137,7 @@
                             @enderror
                         </div>
 
-                        <div>
+                        <div class="mt-2 md:mt-0">
                             <label for="street" class="block font-medium text-sm text-gray-700">Street</label>
                             <input type="text" name="street" id="street" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('street', '') }}" />
@@ -146,7 +146,7 @@
                             @enderror
                         </div>
 
-                        <div>
+                        <div class="mt-2 md:mt-0">
                             <label for="barangay" class="block font-medium text-sm text-gray-700">Barangay</label>
                             <input type="text" name="barangay" id="barangay" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('barangay', '') }}" />
@@ -155,7 +155,7 @@
                             @enderror
                         </div>
 
-                        <div>
+                        <div class="mt-2 md:mt-0">
                             <label for="municipality" class="block font-medium text-sm text-gray-700">Municipality</label>
                             <input type="text" name="municipality" id="municipality" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('municipality', '') }}" />
@@ -164,7 +164,7 @@
                             @enderror
                         </div>
 
-                        <div>
+                        <div class="mt-2 md:mt-0">
                             <label for="province" class="block font-medium text-sm text-gray-700">Province</label>
                             <input type="text" name="province" id="province" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('province', '') }}" />
@@ -173,8 +173,8 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-span-4 flex items-center justify-end px-4 py-3 text-right sm:px-6 overflow-hidden">
-                        <button class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                    <div class="mt-2 md:mt-0 col-span-4 flex items-center justify-end px-4 py-3 text-right sm:px-6 overflow-hidden">
+                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                             Create
                         </button>
                     </div>

@@ -13,29 +13,30 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('role', function (Blueprint $table) {
-            $table->id();
-            $table->string('role_name');
-        });
-
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('f_name');
+            $table->string('m_name');
+            $table->string('l_name');
+            $table->string('gender');
             $table->string('email')->unique();
+            $table->string('contact_no');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            //Default role = Staff
-            $table->unsignedBigInteger('role_id')->default(2);
+            $table->string('role')->default('staff');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
-
-            $table->foreign('role_id')
-                ->references('id')
-                ->on('role')
-                ->onDelete('cascade');
         });
+        DB::statement("ALTER TABLE users 
+                MODIFY role 
+                ENUM('admin', 'staff') 
+                NOT NULL DEFAULT 'staff'");
+        DB::statement("ALTER TABLE users 
+                MODIFY gender 
+                ENUM('Male', 'Female') 
+                NOT NULL");
     }
 
     /**

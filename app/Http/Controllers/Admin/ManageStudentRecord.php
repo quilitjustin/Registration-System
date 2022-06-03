@@ -19,7 +19,7 @@ class ManageStudentRecord extends Controller
 
     private $sortBy = 'created_at';
     private $sortOrder = 'desc';
-
+    
     public function index()
     {
         $records = Records::select('*');
@@ -49,9 +49,6 @@ class ManageStudentRecord extends Controller
 
         if(isset($_GET['sort']) && !empty($_GET['sort'])){
             $sortBy = strip_tags($_GET['sort']);
-            if(!in_array($sortBy, ['id-asc', 'id-desc', 'n-asc', 'n-desc', 'd-asc', 'd-desc'])){
-                return redirect()->route('staff.students.index');
-            }
             switch ($sortBy) {
                 case 'id-asc':
                     $this->sortBy = 'student_id';
@@ -70,16 +67,6 @@ class ManageStudentRecord extends Controller
                 
                 case 'n-desc':
                     $this->sortBy = 'l_name';
-                    $this->sortOrder = 'desc';
-                    break;
-                
-                case 'd-asc':
-                    $this->sortBy = 'created_at';
-                    $this->sortOrder = 'asc';
-                    break;
-
-                case 'd-desc':
-                    $this->sortBy = 'created_at';
                     $this->sortOrder = 'desc';
                     break;
 
@@ -106,7 +93,16 @@ class ManageStudentRecord extends Controller
      */
     public function create()
     {
-        return view('Admin.Students.create');
+        $query = DB::select("SHOW TABLE STATUS LIKE 'users'");
+        $nextStudentId = $query[0]->Auto_increment;
+
+        return view('Admin.Students.create', [
+            'student_id' => $nextStudentId
+        ]);
+    }
+
+    private function capitalize($data){
+        return ucwords(strtolower($data));
     }
 
     /**
@@ -121,16 +117,18 @@ class ManageStudentRecord extends Controller
 
         $record = new Records;
         $record->student_id = $data['student-id'];
-        $record->f_name = $data['f-name'];
-        $record->l_name = $data['l-name'];
-        $record->m_name = $data['m-name'];
+        $record->f_name = $this->capitalize($data['f-name']);
+        $record->l_name = $this->capitalize($data['l-name']);
+        $record->m_name = $this->capitalize($data['m-name']);
         $record->contact_no = $data['contact-no'];
         $record->gender = $data['gender'];
         $record->birthdate = $data['birthdate'];
-        $record->birthplace = $data['birthplace'];
-        $record->guardian = $data['guardian'];
-        $record->relationship_to_guardian = $data['relation'];
+        $record->birthplace = $this->capitalize($data['birthplace']);
+        $record->guardian = $this->capitalize($data['guardian']);
+        $record->relationship_to_guardian = $this->capitalize($data['relation']);
         $record->guardian_contact = $data['guardian-contact'];
+        $record->created_by = \Auth::id();
+        $record->updated_by = \Auth::id();
        
         $record->save();
 
@@ -164,12 +162,19 @@ class ManageStudentRecord extends Controller
         ->select(DB::raw('CONCAT(f_name, " ", m_name, " ", l_name) as name'), 'student.id as st_id', 
             'student.f_name', 'student.l_name', 'student.m_name','student.student_id', 'student.contact_no','student.gender', 
             'student.birthdate', 'student.birthplace', 'address.block', 'address.house_no', 'address.street', 'address.barangay',
-            'address.municipality', 'address.province','student.guardian', 'student.relationship_to_guardian', 'student.guardian_contact')
+            'address.municipality', 'address.province','student.guardian', 'student.relationship_to_guardian', 'student.guardian_contact',
+            'student.created_at', 'student.created_by', 'student.updated_by', 'student.updated_at')
         ->where('address.student_id', $student->id)    
         ->get();
         
+        $record = json_decode($data, true);
+        $created_by = DB::table('users')->where('id', $record[0]['created_by'])->first();
+        $updated_by = DB::table('users')->where('id', $record[0]['updated_by'])->first();
+       
         return view('Admin.Students.show', [
-            'record' => json_decode($data, true)
+            'record' => $record,
+            'created_by' => json_decode(json_encode($created_by), true),
+            'updated_by' => json_decode(json_encode($updated_by), true)
         ]);
     }
 
@@ -206,17 +211,18 @@ class ManageStudentRecord extends Controller
     {
         $data = $request->validated();
 
-        $student->f_name = $data['f-name'];
-        $student->l_name = $data['l-name'];
-        $student->m_name = $data['m-name'];
+        $student->f_name = $this->capitalize($data['f-name']);
+        $student->l_name = $this->capitalize($data['l-name']);
+        $student->m_name = $this->capitalize($data['m-name']);
         $student->student_id = $data['student-id'];
         $student->contact_no = $data['contact-no'];
         $student->gender = $data['gender'];
         $student->birthdate = $data['birthdate'];
-        $student->birthplace = $data['birthplace'];
-        $student->guardian = $data['guardian'];
-        $student->relationship_to_guardian = $data['relation'];
+        $student->birthplace = $this->capitalize($data['birthplace']);
+        $student->guardian = $this->capitalize($data['guardian']);
+        $student->relationship_to_guardian = $this->capitalize($data['relation']);
         $student->guardian_contact = $data['guardian-contact'];
+        $student->updated_by = \Auth::id();
 
         $student->save();
 

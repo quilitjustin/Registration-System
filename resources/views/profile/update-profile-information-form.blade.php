@@ -51,12 +51,26 @@
                 <x-jet-input-error for="photo" class="mt-2" />
             </div>
         @endif
-
-        <!-- Name -->
+        
+        <!-- First Name -->
         <div class="col-span-6 sm:col-span-4">
-            <x-jet-label for="name" value="{{ __('Name') }}" />
-            <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="state.name" autocomplete="name" />
-            <x-jet-input-error for="name" class="mt-2" />
+            <x-jet-label for="f_name" value="{{ __('First Name') }}" />
+            <x-jet-input id="f_name" type="text" class="mt-1 block w-full" wire:model.defer="state.f_name" autocomplete="f_name" />
+            <x-jet-input-error for="f_name" class="mt-2" />
+        </div>
+
+        <!-- Last Name -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="l_name" value="{{ __('Last Name') }}" />
+            <x-jet-input id="l_name" type="text" class="mt-1 block w-full" wire:model.defer="state.l_name" autocomplete="l_name" />
+            <x-jet-input-error for="l_name" class="mt-2" />
+        </div>
+
+        <!-- Middle Name -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="m_name" value="{{ __('Middle Name') }}" />
+            <x-jet-input id="m_name" type="text" class="mt-1 block w-full" wire:model.defer="state.m_name" autocomplete="m_name" />
+            <x-jet-input-error for="m_name" class="mt-2" />
         </div>
 
         <!-- Email -->
@@ -64,6 +78,29 @@
             <x-jet-label for="email" value="{{ __('Email') }}" />
             <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
             <x-jet-input-error for="email" class="mt-2" />
+        </div>
+
+        <!-- Contact Number -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="contact_no" value="{{ __('Contact#') }}" />
+            <x-jet-input id="contact_no" type="text" class="mt-1 block w-full" wire:model.defer="state.contact_no" />
+            <x-jet-input-error for="contact_no" class="mt-2" />
+        </div>
+
+        <!-- Gender -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="gender" value="{{ __('Gender') }}" />
+            <select id="gender" name="gender" class="rounded-md px-1 py-2 mt-1 block w-full" wire:model.defer="state.gender">
+                <option value="null" selected disabled></option>
+                @if(\Auth::user()->gender == 'Male')
+                    <option value="Male" selected>Male</option>
+                    <option value="Female">Female</option>
+                @else
+                    <option value="Male">Male</option>
+                    <option value="Female" selected>Female</option>
+                @endif
+            </select>
+            <x-jet-input-error for="gender" class="mt-2" />
         </div>
     </x-slot>
 

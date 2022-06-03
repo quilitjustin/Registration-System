@@ -15,12 +15,15 @@ class UserUpdateFormRequest extends FormRequest
      */
     public function authorize()
     {   
-        //Authorize if admin or staff
-        if(auth()->user()->role_id == 1 || auth()->user()->role_id == 2){
+        //Authorize if admin only
+        if(auth()->user()->role == "admin"){
             return true;
         }
         return false;
     }
+
+    //This would specify what kind of update would happen
+    private $rule;
 
     /**
      * Get the validation rules that apply to the request.
@@ -29,24 +32,48 @@ class UserUpdateFormRequest extends FormRequest
      */
     public function rules()
     {   
-        $action = $this->request->get('action');
+        $this->rule = $this->request->get('action');
         $id = strip_tags($this->request->get('id'));
-        if($action == 'details'){
+        if($this->rule == 'details'){
             return [
-                'name' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+                'f-name' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+                'l-name' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+                'm-name' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+                'gender' => ['required', 'in:Male,Female'],
                 'email' => ['required', 'email', \Illuminate\Validation\Rule::unique('users')->ignore($id)],
-                'action' => ['required', 'in:details,password'],
+                'contact-no' => ['required', 'regex:/^[09]{2}[0-9]{9}+$/'],
+                'action' => ['required', 'in:details'],
             ];
         }
-        if($action == 'password'){
+        if($this->rule == 'password'){
             return [
-                'action' => ['required', 'in:details,password'],
-                'password' => ['required', 'min:8']
+                'password' => ['required', 'confirmed', 'min:8'],
+                'action' => ['required', 'in:password'],
             ];
         }
 
         //Return an 404 if action has been modified
         abort(404);
         
+    }
+
+    protected function prepareForValidation(){
+        if($this->rule == 'details'){
+            $this->merge([
+                'f-name' => strip_tags($this['f-name']),
+                'l-name' => strip_tags($this['l-name']),
+                'm-name' => strip_tags($this['m-name']),
+                'gender' => strip_tags($this['gender']),
+                'email' => strip_tags($this['email']),
+                'contact-no' => strip_tags($this['contact-no']),
+                'action' => strip_tags($this['action']),
+            ]);
+        }
+        if($this->rule == 'password'){
+            $this->merge([
+                'password' => strip_tags($this['password']),
+                'action' => strip_tags($this['action']),
+            ]);
+        }
     }
 }

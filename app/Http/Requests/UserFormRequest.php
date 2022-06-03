@@ -14,8 +14,8 @@ class UserFormRequest extends FormRequest
      */
     public function authorize()
     {   
-        //Authorize if admin or staff
-        if(auth()->user()->role_id == 1 || auth()->user()->role_id == 2){
+        //Authorize if admin only
+        if(auth()->user()->role == "admin"){
             return true;
         }
         return false;
@@ -29,15 +29,23 @@ class UserFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+            'f-name' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+            'l-name' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+            'm-name' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+            'gender' => ['required', 'in:Male,Female'],
             'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required', 'min:8']
+            'contact-no' => ['required', 'regex:/^[09]{2}[0-9]{9}+$/'],
+            'password' => ['required', 'confirmed', 'min:8']
         ];
     }
     protected function prepareForValidation(){
         $this->merge([
-            'name' => strip_tags($this['name']),
+            'f-name' => strip_tags($this['f-name']),
+            'l-name' => strip_tags($this['l-name']),
+            'm-name' => strip_tags($this['m-name']),
+            'gender' => strip_tags($this['gender']),
             'email' => strip_tags($this['email']),
+            'contact-no' => strip_tags($this['contact-no']),
             'password' => strip_tags($this['password']),
         ]);
     }

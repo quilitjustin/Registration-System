@@ -2,9 +2,9 @@
 
 System for EASTWOODS Professional College of Science and Technology focusing their student registration process. 
 
-## Documentation
+## Requirements
 
-[Google Drive](https://drive.google.com/drive/folders/12YOnvqqusAn6V3209h8FeM3VLGDSakf1?usp=sharing).
+[Google Drive](https://docs.google.com/document/d/1TURozxqh4XzDLhO8uXPN7iFNt7uWYM-o/edit?usp=sharing&ouid=114996150707301677972&rtpof=true&sd=true).
 
 ## Requirements 
 
@@ -12,8 +12,8 @@ System for EASTWOODS Professional College of Science and Technology focusing the
 2. [Xampp](https://www.apachefriends.org/download.html).
 3. Internet Connection.
 4. Working pc.
-5. [registration_system.sql](https://drive.google.com/file/d/1noEGQktwrfWwcM01RtsFSio7OKQwMQx7/view?usp=sharing).
-6. Download a zip file, or make a pull request of the system.
+5. Download a zip file, or make a pull request of the system. [Link]().
+6. Download sql file [here](https://drive.google.com/drive/folders/1805PdlzkjnXLdty7SSAFr7sWVXFrdsMD?usp=sharing).
 
 ## How to install
 
@@ -49,4 +49,4 @@ After completing the requirements above.
 
 If you want to import dummy data provided from our google drive, please read the readme.txt<br/>
 Default login: email = "admin@mail.com" password: "password"<br/>
-If you run into problems, contact the developer: quilitjustin8@gmail.com
+If you run into problems, please contact the developer: quilitjustin8@gmail.com

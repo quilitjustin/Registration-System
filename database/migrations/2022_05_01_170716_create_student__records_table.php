@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('student_record', function (Blueprint $table) {
             $table->id();
-            $table->integer('student_id')->unique();
+            $table->unsignedBigInteger('student_id')->unique();
             $table->string('f_name');
             $table->string('l_name');
             $table->string('m_name');
@@ -26,9 +26,24 @@ return new class extends Migration
             $table->string('guardian');
             $table->string('relationship_to_guardian');
             $table->string('guardian_contact');
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by');
             $table->timestamps();
+
+            $table->foreign('created_by')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+            $table->foreign('updated_by')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
 
+        DB::statement("ALTER TABLE student_record 
+                MODIFY gender 
+                ENUM('Male', 'Female') 
+                NOT NULL");
 
         Schema::create('address', function (Blueprint $table) {
             $table->id();

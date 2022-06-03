@@ -36,18 +36,18 @@ class ManageUsersController extends Controller
                 'id', 'LIKE', "%{$keyword}%"
             );
             $users->orWhere(
-                'name', 'LIKE', "%{$keyword}%"
+                'l_name', 'LIKE', "%{$keyword}%"
             );
             $users->orWhere(
                 'email', 'LIKE', "%{$keyword}%"
+            );
+            $users->orWhere(
+                'role', 'LIKE', "%{$keyword}%"
             );
         }
 
         if(isset($_GET['sort']) && !empty($_GET['sort'])){
             $sortBy = strip_tags($_GET['sort']);
-            if(!in_array($sortBy, ['id-asc', 'id-desc', 'n-asc', 'n-desc', 'd-asc', 'd-desc', 'e-asc', 'e-desc', 'g-asc', 'g-desc'])){
-                return redirect()->route('staff.students.index');
-            }
             switch ($sortBy) {
                 case 'id-asc':
                     $this->sortBy = 'id';
@@ -60,12 +60,12 @@ class ManageUsersController extends Controller
                     break;
         
                 case 'n-asc':
-                    $this->sortBy = 'name';
+                    $this->sortBy = 'l_name';
                     $this->sortOrder = 'asc';
                     break;
                 
                 case 'n-desc':
-                    $this->sortBy = 'name';
+                    $this->sortBy = 'l_name';
                     $this->sortOrder = 'desc';
                     break;
                 
@@ -79,13 +79,23 @@ class ManageUsersController extends Controller
                     $this->sortOrder = 'desc';
                     break;
 
-                case 'd-desc':
+                case 'd-asc':
                     $this->sortBy = 'created_at';
                     $this->sortOrder = 'asc';
                     break;
 
                 case 'd-desc':
                     $this->sortBy = 'created_at';
+                    $this->sortOrder = 'desc';
+                    break;
+
+                case 't-asc':
+                    $this->sortBy = 'role';
+                    $this->sortOrder = 'asc';
+                    break;
+
+                case 't-desc':
+                    $this->sortBy = 'role';
                     $this->sortOrder = 'desc';
                     break;
 
@@ -98,8 +108,6 @@ class ManageUsersController extends Controller
 
         $users = $users
                     ->orderBy($this->sortBy, $this->sortOrder)
-                    //Except Admin
-                    ->where('role_id', '!=', 1)
                     ->paginate(7);
 
         return view('Admin.Users.index',[
@@ -117,6 +125,10 @@ class ManageUsersController extends Controller
         return view('Admin.Users.create');
     }
 
+    private function capitalize($data){
+        return ucwords(strtolower($data));
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -128,12 +140,20 @@ class ManageUsersController extends Controller
         $data = $request->validated();
 
         $user = new User;
-        $user->name = $data['name'];
+        $user->f_name = $this->capitalize($data['f-name']);
+        $user->l_name = $this->capitalize($data['l-name']);
+        $user->m_name = $this->capitalize($data['m-name']);
+        $user->gender = $this->capitalize($data['gender']);
         $user->email = $data['email'];
+        $user->contact_no = $data['contact-no'];
         $user->password = Hash::make($data['password']);
+        $user->created_by = \Auth::id();
+        $user->updated_by = \Auth::id();
         $user->save();
 
-        return redirect()->route('admin.users.index')->with('msg', 'Created Successfully');
+        return redirect()->route('admin.users.show', [
+            'user' => $user->id
+        ])->with('msg', 'Created Successfully');
     }
 
     /**
@@ -142,9 +162,13 @@ class ManageUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $id)
+    public function show(User $user)
     {
-        
+        return view('Admin.Users.show', [
+            'user' => $user,
+            'created_by' => User::where('id', $user['created_by'])->first(),
+            'updated_by' => User::where('id', $user['updated_by'])->first(),
+        ]);
     }
 
     /**
@@ -171,17 +195,23 @@ class ManageUsersController extends Controller
     {
         $data = $request->validated();
         if($data['action'] == 'password'){
-            $password = strip_tags($data['password']);
-            $user->password = Hash::make($password);
+            $user->password = Hash::make($data['password']);
         }
         if($data['action'] == 'details'){
-            $user->name = strip_tags($data['name']);
-            $user->email = strip_tags($data['email']);
+            $user->f_name = $this->capitalize($data['f-name']);
+            $user->l_name = $this->capitalize($data['l-name']);
+            $user->m_name = $this->capitalize($data['m-name']);
+            $user->gender = $this->capitalize($data['gender']);
+            $user->email = $data['email'];
+            $user->contact_no = $data['contact-no'];
         }
         
+        $user->updated_by = \Auth::id();
         $user->save();
 
-        return redirect()->route('admin.users.index')->with('msg', 'Updated Successfully');
+        return redirect()->route('admin.users.show', [
+            'user' => $user->id
+        ])->with('msg', 'Updated Successfully');
     }
 
     /**
@@ -192,6 +222,10 @@ class ManageUsersController extends Controller
      */
     public function destroy(User $user)
     {
+        if($user['id'] == \Auth::id() && $user['role'] == "admin"){
+            return redirect()->route('admin.users.index')->with('msg', 'You cant delete the current admin account that you are using. Update instead?');
+        }
+
         $user->delete();
         return redirect()->route('admin.users.index')->with('msg', 'Deleted Successfully');
     }

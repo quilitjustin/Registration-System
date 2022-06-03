@@ -14,7 +14,7 @@ class StudentFormRequest extends FormRequest
     public function authorize()
     {   
         //Authorize if admin or staff
-        if(auth()->user()->role_id == 1 || auth()->user()->role_id == 2){
+        if(auth()->user()->role == 'admin' || auth()->user()->role == 'staff'){
             return true;
         }
         return false;
@@ -35,7 +35,7 @@ class StudentFormRequest extends FormRequest
             'student-id' => ['required', 'digits_between:1,9', \Illuminate\Validation\Rule::unique('student_record', 'student_id')->ignore($id)],
             'contact-no' => ['required', 'regex:/^[09]{2}[0-9]{9}+$/'],
             'gender' => ['required', 'in:Male,Female'],
-            'birthdate' => ['required', 'date'],
+            'birthdate' => ['required', 'date', 'before:today'],
             'birthplace' => ['required'],
             'block' => ['required'],
             'house-no' => ['required', 'digits_between:1,9'],
