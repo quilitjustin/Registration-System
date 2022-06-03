@@ -14,8 +14,8 @@
                 </div>
                 <form class="bg-white mx-auto p-5" method="POST" action="{{ route('admin.users.store') }}">
                     @csrf
-                    <div class="md:grid grid-cols-3 gap-3">
-                        <p class="col-span-3 font-semibold text-xl text-indigo-800">Profile</p>
+                    <div class="md:grid grid-cols-4 gap-4">
+                        <p class="mt-2 md:mt-0 col-span-4 font-semibold text-xl text-indigo-800">Profile</p>
                         <div class="mt-2 md:mt-0">
                             <label for="f-name" class="block font-medium text-sm text-gray-700">First Name</label>
                             <input type="text" name="f-name" id="f-name" class="form-input rounded-md shadow-sm mt-1 block w-full"

@@ -16,8 +16,8 @@
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="id" value="{{ $record[0]['st_id'] }}">
-                    <div class="grid grid-cols-4 gap-4">
-                        <p class="col-span-4 font-semibold">Details</p>
+                    <div class="md:grid grid-cols-4 gap-4">
+                        <p class="mt-2 md:mt-0 col-span-4 font-semibold text-xl text-indigo-800">Details</p>
                         <div class="mt-2 md:mt-0">
                             <label for="f-name" class="block font-medium text-sm text-gray-700">First Name</label>
                             <input type="text" name="f-name" id="f-name" class="form-input rounded-md shadow-sm mt-1 block w-full"
@@ -125,7 +125,8 @@
                             @enderror
                         </div>
 
-                        <p class="col-span-4 font-semibold">Address</p>
+                        <p class="mt-5 md:mt-0 col-span-4 font-semibold text-xl text-indigo-800">Address</p>
+
                         <div class="mt-2 md:mt-0">
                             <label for="block" class="block font-medium text-sm text-gray-700">Block</label>
                             <input type="text" name="block" id="block" class="form-input rounded-md shadow-sm mt-1 block w-full"

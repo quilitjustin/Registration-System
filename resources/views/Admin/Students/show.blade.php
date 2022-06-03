@@ -20,8 +20,8 @@
                 <div class="flex items-center font-semibold px-3 md:px-4 py-3 bg-gray-50 sm:px-6 shadow overflow-hidden rounded-md">
                     <p>{{ $record[0]['name'] }}</p>
                 </div>
-                <div class="grid grid-cols-4 gap-4 bg-white p-5">
-                    <p class="col-span-4 font-semibold text-xl text-indigo-800">Details</p>
+                <div class="md:grid grid-cols-4 gap-4 bg-white p-5">
+                    <p class="mt-2 md:mt-0 col-span-4 font-semibold text-xl text-indigo-800">Details</p>
 
                      <div class="mt-2 md:mt-0">
                         <p class="block font-medium text-sm text-gray-700">Student ID: </p>
@@ -78,7 +78,7 @@
                         <p class="font-semibold">{{ $record[0]['guardian_contact'] }}</p>
                     </div>
 
-                    <p class="col-span-4 font-semibold text-xl text-indigo-800">Address</p>
+                    <p class="mt-5 md:mt-0 col-span-4 font-semibold text-xl text-indigo-800">Address</p>
 
                     <div class="mt-2 md:mt-0">
                         <p class="block font-medium text-sm text-gray-700">Block: </p>
@@ -110,7 +110,7 @@
                         <p class="font-semibold">{{ $record[0]['province'] }}</p>
                     </div>
 
-                    <p class="col-span-4 font-semibold text-xl text-indigo-800">Status</p>
+                    <p class="mt-5 md:mt-0 col-span-4 font-semibold text-xl text-indigo-800">Status</p>
 
                     <div class="mt-2 md:mt-0">
                         <p class="block font-medium text-sm text-gray-700">

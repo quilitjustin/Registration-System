@@ -13,14 +13,14 @@
         </div>
     @endif
     <div>
-        <div class="max-w-6xl mx-auto py-10 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto px-2 py-10 lg:px-8">
             <div class="block mb-8">
                 <a href="{{ route('staff.students.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Add Record</a>
                 <form class="inline-block" method="GET" action="{{ route('staff.students.index') }}" style="width:10rem">
                     @if(isset($_GET['search']) && !empty($_GET['search']))
                         <input type="hidden" name="search" value="{{ $_GET['search'] }}">
                     @endif
-                    <select onchange="this.form.submit()" id="sort" name="sort" class="form-input rounded-md py-2 shadow-sm mt-1 block w-full">
+                    <select onchange="this.form.submit()" id="sort" name="sort" class="px-2 form-input rounded-md py-2 shadow-sm mt-1 block w-full">
                         <option value="null" selected disabled>Sort By</option>
                         <option value="id-desc"
                             @isset ($_GET['sort'])

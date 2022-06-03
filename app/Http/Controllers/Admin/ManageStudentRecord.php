@@ -93,9 +93,12 @@ class ManageStudentRecord extends Controller
      */
     public function create()
     {
-        $query = DB::select("SHOW TABLE STATUS LIKE 'users'");
-        $nextStudentId = $query[0]->Auto_increment;
-
+        //Get the next student_id not id
+        $query = DB::select("SELECT student_id FROM student_record ORDER BY student_id DESC LIMIT 1");
+        $nextStudentId = json_decode(json_encode($query), true);
+        //This will be the next student_id 
+        $nextStudentId = $nextStudentId[0]['student_id'] + 1;
+        
         return view('Admin.Students.create', [
             'student_id' => $nextStudentId
         ]);

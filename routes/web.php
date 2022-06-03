@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Admin\ExportController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,6 +36,22 @@ Route::group(['middleware' => 'auth'], function(){
         Route::resource('users', App\Http\Controllers\Admin\ManageUsersController::class);
         //For managing Student Records
         Route::resource('students', App\Http\Controllers\Admin\ManageStudentRecord::class);
+        //For every export request
+        // Route::group([
+        //     'prefix' => 'export',
+        //     'as' => 'export.',
+        // ], function(){
+            //View of export page
+            Route::get('export', function(){
+                return view('Admin.export');
+            })->name('export');
+            //Export Users into csv
+            Route::get('export_users', [ExportController::class, 'exportUsers'])->name('export_users');
+            //Export Students and Address into csv
+            Route::get('export_students', [ExportController::class, 'exportStudents'])->name('export_students');
+            //Export Students and Address into csv
+            Route::get('export_address', [ExportController::class, 'exportAddress'])->name('export_address');
+        // });
     });
 
     Route::group([

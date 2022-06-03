@@ -63,7 +63,7 @@
                         <p class="font-semibold">{{ $user['role'] }}</p>
                     </div>
 
-                    <p class="mt-2 md:mt-0 col-span-4 font-semibold text-xl text-indigo-800">Status</p>
+                    <p class="mt-5 md:mt-0 col-span-4 font-semibold text-xl text-indigo-800">Status</p>
 
                     <div class="mt-2 md:mt-0">
                         <p class="block font-medium text-sm text-gray-700">
