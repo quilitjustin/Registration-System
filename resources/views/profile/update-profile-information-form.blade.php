@@ -83,7 +83,8 @@
         <!-- Contact Number -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="contact_no" value="{{ __('Contact#') }}" />
-            <x-jet-input id="contact_no" type="text" class="mt-1 block w-full" wire:model.defer="state.contact_no" />
+            <x-jet-input id="contact_no" type="text" class="mt-1 block w-full" wire:model.defer="state.contact_no" 
+            pattern="[09]{2}[0-9]{9}"/>
             <x-jet-input-error for="contact_no" class="mt-2" />
         </div>
 

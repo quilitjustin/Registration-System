@@ -26,6 +26,7 @@ Route::middleware([
     })->name('dashboard');
 });
 
+// middleware = \app\Http\Middleware\Role.php
 Route::group(['middleware' => 'auth'], function(){
     Route::group([
         'prefix' => 'admin',
@@ -47,9 +48,9 @@ Route::group(['middleware' => 'auth'], function(){
             })->name('export');
             //Export Users into csv
             Route::get('export_users', [ExportController::class, 'exportUsers'])->name('export_users');
-            //Export Students and Address into csv
+            //Export Students into csv
             Route::get('export_students', [ExportController::class, 'exportStudents'])->name('export_students');
-            //Export Students and Address into csv
+            //Export Address into csv
             Route::get('export_address', [ExportController::class, 'exportAddress'])->name('export_address');
         // });
     });

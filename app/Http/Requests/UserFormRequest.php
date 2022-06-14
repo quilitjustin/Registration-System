@@ -28,6 +28,11 @@ class UserFormRequest extends FormRequest
      */
     public function rules()
     {
+        /**
+         * 'regex:/^[a-zA-Z ]*$/' = uppercase, lowercase, whitespace
+         * 'regex:/^[09]{2}[0-9]{9}+$/' = must start with 09 then, 9 integer 
+         * 'confired' = will confirm 'password' field with 'password_confirmation' field
+         */
         return [
             'f-name' => ['required', 'regex:/^[a-zA-Z ]*$/'],
             'l-name' => ['required', 'regex:/^[a-zA-Z ]*$/'],

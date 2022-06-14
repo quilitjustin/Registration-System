@@ -28,23 +28,29 @@ class StudentFormRequest extends FormRequest
     public function rules()
     {
         $id = strip_tags($this->request->get('id'));
+        /**
+         * 'regex:/^[a-zA-Z ]*$/' = uppercase, lowercase, whitespace
+         * 'regex:/^[0-9]{2}[-]{1}[0-9]{4}+$/' = two integer then, one '-' then, four integer: ex. 22-0001
+         * 'regex:/^[09]{2}[0-9]{9}+$/' = must start with 09 then, 9 integer 
+         *  date_format:Y-m-d
+         */
         return [
-            'f-name' => ['required'],
-            'l-name' => ['required'],
-            'm-name' => ['required'],
-            'student-id' => ['required', 'digits_between:1,9', \Illuminate\Validation\Rule::unique('student_record', 'student_id')->ignore($id)],
+            'f-name' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+            'l-name' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+            'm-name' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+            'student-id' => ['required', 'regex:/^[0-9]{2}[-]{1}[0-9]{4}$/', \Illuminate\Validation\Rule::unique('student_record', 'student_id')->ignore($id)],
             'contact-no' => ['required', 'regex:/^[09]{2}[0-9]{9}+$/'],
             'gender' => ['required', 'in:Male,Female'],
-            'birthdate' => ['required', 'date', 'before:today'],
-            'birthplace' => ['required'],
+            'birthdate' => ['required', 'date_format:Y-m-d', 'before:today'],
+            'birthplace' => ['required', 'regex:/^[a-zA-Z ]*$/'],
             'block' => ['required'],
             'house-no' => ['required', 'digits_between:1,9'],
-            'street' => ['required'],
-            'barangay' => ['required'],
-            'municipality' => ['required'],
-            'province' => ['required'],
-            'guardian' => ['required'],
-            'relation' => ['required'],
+            'street' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+            'barangay' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+            'municipality' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+            'province' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+            'guardian' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+            'relation' => ['required', 'regex:/^[a-zA-Z ]*$/'],
             'guardian-contact' => ['required', 'regex:/^[09]{2}[0-9]{9}+$/']
         ];
     }

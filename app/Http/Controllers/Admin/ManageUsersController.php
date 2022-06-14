@@ -23,12 +23,7 @@ class ManageUsersController extends Controller
     {
         $users = User::select('*');
         if(isset($_GET['search']) && !empty($_GET['search'])){
-            if(isset($_GET['rule'])){
-                if($_GET['rule'] == 'ns-reset'){
-                    $this->sortBy = 'created_at';
-                    $this->sortOrder = 'desc';
-                }
-                unset($_GET['rule']);
+            if(isset($_GET['sort'])){
                 unset($_GET['sort']);
             }
             $keyword = strip_tags($_GET['search']);
@@ -79,16 +74,6 @@ class ManageUsersController extends Controller
                     $this->sortOrder = 'desc';
                     break;
 
-                case 'd-asc':
-                    $this->sortBy = 'created_at';
-                    $this->sortOrder = 'asc';
-                    break;
-
-                case 'd-desc':
-                    $this->sortBy = 'created_at';
-                    $this->sortOrder = 'desc';
-                    break;
-
                 case 't-asc':
                     $this->sortBy = 'role';
                     $this->sortOrder = 'asc';
@@ -96,6 +81,16 @@ class ManageUsersController extends Controller
 
                 case 't-desc':
                     $this->sortBy = 'role';
+                    $this->sortOrder = 'desc';
+                    break;
+                
+                case 'd-asc':
+                    $this->sortBy = 'updated_at';
+                    $this->sortOrder = 'asc';
+                    break;
+
+                case 'd-desc':
+                    $this->sortBy = 'updated_at';
                     $this->sortOrder = 'desc';
                     break;
 

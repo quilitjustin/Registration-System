@@ -15,7 +15,7 @@
     <div>
         <div class="max-w-6xl mx-auto px-2 py-10 lg:px-8">
             <div class="block mb-8">
-                <a href="{{ route('admin.students.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Add Record</a>
+                <a href="{{ route('admin.students.create') }}" class="bg-indigo-600 hover:bg-indigo-800 text-white font-bold py-2 px-4 rounded">Add Record</a>
                 <form class="inline-block" method="GET" action="{{ route('admin.students.index') }}" style="width:10rem">
                     @if(isset($_GET['search']) && !empty($_GET['search']))
                         <input type="hidden" name="search" value="{{ $_GET['search'] }}">
@@ -85,9 +85,6 @@
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50">
                                         <form action="{{ route('admin.students.index') }}" method="GET">
-                                            @if(isset($_GET['sort']))
-                                                <input type="hidden" name="rule" id="rule" value="s-reset">
-                                            @endif
                                             <input type="text" name="search" id="search" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="search">
                                         </form>
                                     </th>
@@ -118,7 +115,7 @@
                                                 </td>
                                             </tr>
                                             @empty
-                                            <div class="text-center font-semibold text-xl text-indigo-800">
+                                            <div class="text-center font-semibold text-xl text-white bg-indigo-800 p-1 rounded">
                                                 <p>No Information Avaiilable.</p>
                                             </div>
                                         @endforelse

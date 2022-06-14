@@ -10,6 +10,9 @@
                 <div class="flex items-center font-semibold px-3 md:px-4 py-3 bg-gray-50 sm:px-6 shadow overflow-hidden rounded-md">
                     <p>Export Your Tables</p>
                 </div>
+                {{-- 
+                    Controller: \app\Http\Controllers\Admin\ExportController.php
+                 --}}
                 <div class="md:grid grid-cols-4 gap-4 bg-white p-5">
                     <a href="{{ route('admin.export_users') }}" class="block mt-4 md:inline-block md:mt-0 text-center bg-indigo-600 hover:bg-indigo-800 text-white font-bold py-2 px-4 rounded">Export Users</a>
                     <a href="{{ route('admin.export_students') }}" class="block mt-4 md:inline-block md:mt-0 text-center bg-indigo-600 hover:bg-indigo-800 text-white font-bold py-2 px-4 rounded">Export Students</a>

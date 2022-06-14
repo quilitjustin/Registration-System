@@ -26,6 +26,11 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
     public function update($user, array $input)
     {
         Validator::make($input, [
+            /**
+             * 'regex:/^[a-zA-Z ]*$/' = uppercase, lowercase, whitespace
+             * 'regex:/^[09]{2}[0-9]{9}+$/' = must start with 09 then, 9 integer 
+             *  Rule::unique('users')->ignore($user->id) = will ignore his own unique email
+             */
             'f_name' => ['required', 'regex:/^[a-zA-Z ]*$/'],
             'l_name' => ['required', 'regex:/^[a-zA-Z ]*$/'],
             'm_name' => ['required', 'regex:/^[a-zA-Z ]*$/'],

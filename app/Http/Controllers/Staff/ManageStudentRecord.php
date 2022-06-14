@@ -17,19 +17,14 @@ class ManageStudentRecord extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    private $sortBy = 'created_at';
+    private $sortBy = 'updated_at';
     private $sortOrder = 'desc';
     
     public function index()
     {
         $records = Records::select('*');
         if(isset($_GET['search']) && !empty($_GET['search'])){
-            if(isset($_GET['rule'])){
-                if($_GET['rule'] == 'ns-reset'){
-                    $this->sortBy = 'created_at';
-                    $this->sortOrder = 'desc';
-                }
-                unset($_GET['rule']);
+            if(isset($_GET['sort'])){
                 unset($_GET['sort']);
             }
             $keyword = strip_tags($_GET['search']);
@@ -70,6 +65,16 @@ class ManageStudentRecord extends Controller
                     $this->sortOrder = 'desc';
                     break;
 
+                case 'd-asc':
+                    $this->sortBy = 'updated_at';
+                    $this->sortOrder = 'asc';
+                    break;
+
+                case 'd-desc':
+                    $this->sortBy = 'updated_at';
+                    $this->sortOrder = 'desc';
+                    break;
+
                 default:
                     $this->sortBy = 'created_at';
                     $this->sortOrder = 'desc';
@@ -93,8 +98,24 @@ class ManageStudentRecord extends Controller
      */
     public function create()
     {
-        $query = DB::select("SHOW TABLE STATUS LIKE 'users'");
-        $nextStudentId = $query[0]->Auto_increment;
+        //Get the last student_id not id
+        $query = DB::select("SELECT student_id FROM student_record ORDER BY student_id DESC LIMIT 1");
+        
+        if(!empty($query)){
+            $nextStudentId = json_decode(json_encode($query), true);
+            // This will be the next student_id 
+            // Split the last student id into two parts
+            // From ex. 22-0001 to arr[0] = 22 and arr[1] = 0001
+            $nextStudentId = explode("-", $nextStudentId[0]['student_id']);
+            // Reconstruct the ID
+            // sprintf will add necessary 0
+            // "%04d" = 4 digits, if (($nextStudentId[1] + 1).length > 4 digits) append zeros to make it 4 digits
+            // ex. ($nextStudentId[1] + 1) = 2, will become 0002,
+            // so the final output would become 22-0002
+            $nextStudentId = $nextStudentId[0] . "-" . sprintf("%04d", $nextStudentId[1] + 1);
+        }else{
+            $nextStudentId = '00-0001';
+        }
 
         return view('Staff.Students.create', [
             'student_id' => $nextStudentId

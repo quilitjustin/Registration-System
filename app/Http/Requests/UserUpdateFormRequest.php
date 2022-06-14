@@ -35,6 +35,12 @@ class UserUpdateFormRequest extends FormRequest
         $this->rule = $this->request->get('action');
         $id = strip_tags($this->request->get('id'));
         if($this->rule == 'details'){
+            /**
+             * 'regex:/^[a-zA-Z ]*$/' = uppercase, lowercase, whitespace
+             * 'regex:/^[09]{2}[0-9]{9}+$/' = must start with 09 then, 9 integer 
+             * \Illuminate\Validation\Rule::unique('users')->ignore($id) = will ignore his own unique email
+             * 'confired' = will confirm 'password' field with 'password_confirmation' field
+             */
             return [
                 'f-name' => ['required', 'regex:/^[a-zA-Z ]*$/'],
                 'l-name' => ['required', 'regex:/^[a-zA-Z ]*$/'],
