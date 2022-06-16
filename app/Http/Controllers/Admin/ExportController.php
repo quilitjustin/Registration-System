@@ -20,6 +20,11 @@ class ExportController extends Controller{
 
         $list = User::all()->toArray();
 
+        if(empty($list)){
+            return redirect()->route('admin.export')
+                ->with('msg', 'No Information available for this table to export');
+        }
+
         //Add headers for each column in the CSV download
         array_unshift($list, array_keys($list[0]));
 
@@ -45,6 +50,11 @@ class ExportController extends Controller{
 
         $list = Records::all()->toArray();
 
+        if(empty($list)){
+            return redirect()->route('admin.export')
+                ->with('msg', 'No Information available for this table to export');
+        }
+
         //Add headers for each column in the CSV download
         array_unshift($list, array_keys($list[0]));
 
@@ -69,6 +79,11 @@ class ExportController extends Controller{
         ];
 
         $list = Address::all()->toArray();
+
+        if(empty($list)){
+            return redirect()->route('admin.export')
+                ->with('msg', 'No Information available for this table to export');
+        }
 
         //Add headers for each column in the CSV download
         array_unshift($list, array_keys($list[0]));
