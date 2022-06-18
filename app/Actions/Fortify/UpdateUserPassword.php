@@ -9,7 +9,7 @@ use Laravel\Fortify\Contracts\UpdatesUserPasswords;
 class UpdateUserPassword implements UpdatesUserPasswords
 {
     use PasswordValidationRules;
-
+    
     /**
      * Validate and update the user's password.
      *
@@ -19,6 +19,11 @@ class UpdateUserPassword implements UpdatesUserPasswords
      */
     public function update($user, array $input)
     {
+        //Remove after Open Beta
+        if(\Auth::id() == 1){
+            return redirect()->route('admin.users.index')
+                ->with('msg', 'Cannot change default user account details during testing period. Update different account instead?');
+        }
         Validator::make($input, [
             'current_password' => ['required', 'string'],
             'password' => $this->passwordRules(),

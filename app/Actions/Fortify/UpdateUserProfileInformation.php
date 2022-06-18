@@ -25,6 +25,11 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
      */
     public function update($user, array $input)
     {
+        //Remove after Open Beta
+        if(\Auth::id() == 1){
+            return redirect()->route('admin.users.index')
+                ->with('msg', 'Cannot change default user account details during testing period. Update different account instead?');
+        }
         Validator::make($input, [
             /**
              * 'regex:/^[a-zA-Z ]*$/' = uppercase, lowercase, whitespace
