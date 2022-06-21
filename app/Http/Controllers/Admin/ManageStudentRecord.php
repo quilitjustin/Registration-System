@@ -143,7 +143,7 @@ class ManageStudentRecord extends Controller
         $record->l_name = $this->capitalize($data['l-name']);
         $record->m_name = $this->capitalize($data['m-name']);
         $record->contact_no = $data['contact-no'];
-        $record->gender = $data['gender'];
+        $record->gender = $this->capitalize($data['gender']);
         $record->birthdate = $data['birthdate'];
         $record->birthplace = $this->capitalize($data['birthplace']);
         $record->guardian = $this->capitalize($data['guardian']);
@@ -156,13 +156,13 @@ class ManageStudentRecord extends Controller
 
         $address = new Address;
 
-        $address->block = $data['block'];
+        $address->block = $this->capitalize($data['block']);
         $address->house_no = $data['house-no'];
-        $address->street = $data['street'];
-        $address->barangay = $data['barangay'];
-        $address->municipality = $data['municipality'];
-        $address->province = $data['province'];
-        $address->student_id = $record->id;
+        $address->street = $this->capitalize($data['street']);
+        $address->barangay = $this->capitalize($data['barangay']);
+        $address->municipality = $this->capitalize($data['municipality']);
+        $address->province = $this->capitalize($data['province']);
+        $address->student_id = $this->capitalize($record->id);
 
         $address->save();
 
@@ -238,7 +238,7 @@ class ManageStudentRecord extends Controller
         $student->m_name = $this->capitalize($data['m-name']);
         $student->student_id = $data['student-id'];
         $student->contact_no = $data['contact-no'];
-        $student->gender = $data['gender'];
+        $student->gender = $this->capitalize($data['gender']);
         $student->birthdate = $data['birthdate'];
         $student->birthplace = $this->capitalize($data['birthplace']);
         $student->guardian = $this->capitalize($data['guardian']);
@@ -250,12 +250,12 @@ class ManageStudentRecord extends Controller
 
         $address = Address::where('student_id', $student->id)->first();
 
-        $address->block = $data['block'];
+        $address->block = $this->capitalize($data['block']);
         $address->house_no = $data['house-no'];
-        $address->street = $data['street'];
-        $address->barangay = $data['barangay'];
-        $address->municipality = $data['municipality'];
-        $address->province = $data['province'];
+        $address->street = $this->capitalize($data['street']);
+        $address->barangay = $this->capitalize($data['barangay']);
+        $address->municipality = $this->capitalize($data['municipality']);
+        $address->province = $this->capitalize($data['province']);
 
         $address->save();
 

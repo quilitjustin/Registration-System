@@ -34,6 +34,12 @@ class ManageUsersController extends Controller
                 'l_name', 'LIKE', "%{$keyword}%"
             );
             $users->orWhere(
+                'f_name', 'LIKE', "%{$keyword}%"
+            );
+            $users->orWhere(
+                'm_name', 'LIKE', "%{$keyword}%"
+            );
+            $users->orWhere(
                 'email', 'LIKE', "%{$keyword}%"
             );
             $users->orWhere(

@@ -54,9 +54,9 @@
 
                         <div class="mt-2 md:mt-0">
                             <label for="contact-no" class="block font-medium text-sm text-gray-700">Contact#</label>
-                            <input type="text" name="contact-no" id="contact-no" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                            <input type="number" name="contact-no" id="contact-no" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ $user['contact_no'] }}" placeholder="ex. 09123456789" 
-                                   pattern="[09]{2}[0-9]{9}" required/>
+                                   required/>
                             @error('contact-no')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror

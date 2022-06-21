@@ -53,7 +53,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'l_name' => $this->format($input['l_name']),
                 'm_name' => $this->format($input['m_name']),
                 'contact_no' => strip_tags($input['contact_no']),
-                'gender' =>strip_tags($input['gender']),
+                'gender' => $this->format($input['gender']),
                 'email' => strip_tags($input['email']),
                 'updated_by' => \Auth::id(),
             ])->save();

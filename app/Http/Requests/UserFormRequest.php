@@ -40,6 +40,7 @@ class UserFormRequest extends FormRequest
             'gender' => ['required', 'in:Male,Female'],
             'email' => ['required', 'email', 'unique:users'],
             'contact-no' => ['required', 'regex:/^[09]{2}[0-9]{9}+$/'],
+            //confirmed-password
             'password' => ['required', 'confirmed', 'min:8']
         ];
     }

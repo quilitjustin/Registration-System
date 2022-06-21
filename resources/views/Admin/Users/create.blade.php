@@ -23,7 +23,7 @@
                         <div class="mt-2 md:mt-0">
                             <label for="f-name" class="block font-medium text-sm text-gray-700">First Name</label>
                             <input type="text" name="f-name" id="f-name" class="form-input rounded-md shadow-sm mt-1 block w-full"
-                                   value="{{ old('f-name', '') }}" placeholder="ex. Jun" required/>
+                                   value="{{ old('f-name', '') }}" placeholder="ex. Jun"  required/>
                             @error('f-name')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror
@@ -32,7 +32,7 @@
                         <div class="mt-2 md:mt-0">
                             <label for="l-name" class="block font-medium text-sm text-gray-700">Last Name</label>
                             <input type="text" name="l-name" id="l-name" class="form-input rounded-md shadow-sm mt-1 block w-full"
-                                   value="{{ old('l-name', '') }}" placeholder="ex. Dela Cruz" required/>
+                                   value="{{ old('l-name', '') }}" placeholder="ex. Dela Cruz"  required/>
                             @error('l-name')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror
@@ -41,7 +41,7 @@
                         <div class="mt-2 md:mt-0">
                             <label for="m-name" class="block font-medium text-sm text-gray-700">Middle Name</label>
                             <input type="text" name="m-name" id="m-name" class="form-input rounded-md shadow-sm mt-1 block w-full"
-                                   value="{{ old('m-name', '') }}" placeholder="ex. De Luna" required/>
+                                   value="{{ old('m-name', '') }}" placeholder="ex. De Luna"  required/>
                             @error('m-name')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror
@@ -49,9 +49,9 @@
 
                         <div class="mt-2 md:mt-0">
                             <label for="contact-no" class="block font-medium text-sm text-gray-700">Contact#</label>
-                            <input type="text" name="contact-no" id="contact-no" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                            <input type="number" name="contact-no" id="contact-no" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('contact-no', '') }}" placeholder="ex. 09123456789" 
-                                   pattern="[09]{2}[0-9]{9}" required/>
+                                     required/>
                             @error('contact-no')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror
@@ -59,7 +59,7 @@
                         
                         <div class="mt-2 md:mt-0">
                             <label for="gender" class="block font-medium text-sm text-gray-700">Gender</label>
-                            <select id="gender" name="gender" class="form-input rounded-md py-2 shadow-sm mt-1 block w-full" required>
+                            <select id="gender" name="gender" class="form-input rounded-md py-2 shadow-sm mt-1 block w-full" >
                                 <option value="" selected disabled>Select Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
@@ -72,7 +72,7 @@
                         <div class="mt-2 md:mt-0">
                             <label for="email" class="block font-medium text-sm text-gray-700">Email</label>
                             <input type="email" name="email" id="email" class="form-input rounded-md shadow-sm mt-1 block w-full"
-                                   value="{{ old('email', '') }}" placeholder="my@gmail.com" required/>
+                                   value="{{ old('email', '') }}" placeholder="my@gmail.com"  required/>
                             @error('email')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror
@@ -80,7 +80,7 @@
 
                         <div class="mt-2 md:mt-0">
                             <label for="password" class="block font-medium text-sm text-gray-700">Password</label>
-                            <input type="password" name="password" id="password" class="form-input rounded-md shadow-sm mt-1 block w-full" placeholder="password" required/>
+                            <input type="password" name="password" id="password" class="form-input rounded-md shadow-sm mt-1 block w-full" placeholder="password"  required/>
                             @error('password')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror
@@ -88,7 +88,7 @@
 
                         <div class="mt-2 md:mt-0">
                             <label for="password_confirmation" class="block font-medium text-sm text-gray-700">Confirm Password</label>
-                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-input rounded-md shadow-sm mt-1 block w-full" placeholder="re-password" required/>
+                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-input rounded-md shadow-sm mt-1 block w-full" placeholder="re-password"  required/>
                             @error('password_confirmation')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror

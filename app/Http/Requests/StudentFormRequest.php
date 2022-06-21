@@ -38,11 +38,13 @@ class StudentFormRequest extends FormRequest
             'f-name' => ['required', 'regex:/^[a-zA-Z ]*$/'],
             'l-name' => ['required', 'regex:/^[a-zA-Z ]*$/'],
             'm-name' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+            //22-0001
             'student-id' => ['required', 'regex:/^[0-9]{2}[-]{1}[0-9]{4}$/', \Illuminate\Validation\Rule::unique('student_record', 'student_id')->ignore($id)],
             'contact-no' => ['required', 'regex:/^[09]{2}[0-9]{9}+$/'],
             'gender' => ['required', 'in:Male,Female'],
             'birthdate' => ['required', 'date_format:Y-m-d', 'before:today'],
             'birthplace' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+            //Block 1 Block A
             'block' => ['required'],
             'house-no' => ['required', 'digits_between:1,9'],
             'street' => ['required', 'regex:/^[a-zA-Z ]*$/'],

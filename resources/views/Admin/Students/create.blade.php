@@ -58,9 +58,9 @@
 
                         <div class="mt-2 md:mt-0">
                             <label for="contact-no" class="block font-medium text-sm text-gray-700">Contact#</label>
-                            <input type="text" name="contact-no" id="contact-no" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                            <input type="number" name="contact-no" id="contact-no" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('contact-no', '') }}" placeholder="ex. 09123456789" 
-                                   pattern="[09]{2}[0-9]{9}" required/>
+                                   required/>
                             @error('contact-no')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror
@@ -68,7 +68,7 @@
                         
                         <div class="mt-2 md:mt-0">
                             <label for="gender" class="block font-medium text-sm text-gray-700">Gender</label>
-                            <select id="gender" name="gender" class="form-input rounded-md py-2 shadow-sm mt-1 block w-full" required>
+                            <select id="gender" name="gender" class="form-input rounded-md py-2 shadow-sm mt-1 block w-full">
                                 <option value="" selected disabled>Select Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
@@ -116,9 +116,9 @@
 
                         <div class="mt-2 md:mt-0">
                             <label for="guardian-contact" class="block font-medium text-sm text-gray-700">Guardian Contact#</label>
-                            <input type="text" name="guardian-contact" id="guardian-contact" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                            <input type="number" name="guardian-contact" id="guardian-contact" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('guardian-contact', '') }}" placeholder="ex. 09123456789" 
-                                   pattern="[09]{2}[0-9]{9}" required/>
+                                    required/>
                             @error('guardian-contact')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror
@@ -147,7 +147,7 @@
                         <div class="mt-2 md:mt-0">
                             <label for="street" class="block font-medium text-sm text-gray-700">Street</label>
                             <input type="text" name="street" id="street" class="form-input rounded-md shadow-sm mt-1 block w-full"
-                                   value="{{ old('street', '') }}" placeholder="ex. Aguinaldo St." required/>
+                                   value="{{ old('street', '') }}" placeholder="ex. Aguinaldo St."  required/>
                             @error('street')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror
