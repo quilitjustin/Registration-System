@@ -7,7 +7,7 @@
         </h2>
     </x-slot>
     @if(session()->has('msg'))
-        <div class="flex items-center justify-center bg-green-600 py-2
+        <div class="flex items-center justify-center bg-green-600 p-2
             @if (session()->get('msg') == 'Deleted Successfully')
                 {{ 'bg-red-600' }}
             @endif">

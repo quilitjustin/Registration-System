@@ -189,11 +189,7 @@ class ManageUsersController extends Controller
     public function update(UserUpdateFormRequest $request, User $user)
     {
         $data = $request->validated();
-        //Remove after Open Beta
-        if($user->id == 1){
-            return redirect()->route('admin.users.index')
-                ->with('msg', 'Cannot change default user account details during testing period. Update different account instead?');
-        }
+        
         if($data['action'] == 'password'){
             $user->password = Hash::make($data['password']);
         }
